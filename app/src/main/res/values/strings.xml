@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">WatchMovie</string>
+    <string name="button">Кнопка1</string>
+    <string name="button2">Кнопка2</string>
+    <string name="button3">Кнопка3</string>
+    <string name="button4">Кнопка4</string>
+    <string name="button5">Кнопка5</string>
+    <string name="disclaimer">Постеры c https://www.movieposters.com/</string>
 </resources>
