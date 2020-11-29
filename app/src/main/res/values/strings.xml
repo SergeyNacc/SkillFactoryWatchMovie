@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">WatchMovie</string>
-    <string name="button">Кнопка1</string>
-    <string name="button2">Кнопка2</string>
-    <string name="button3">Кнопка3</string>
-    <string name="button4">Кнопка4</string>
-    <string name="button5">Кнопка5</string>
     <string name="disclaimer">Постеры c https://www.movieposters.com/</string>
+    <string name="btn_menu">Меню</string>
+    <string name="btn_fav">Избранное</string>
+    <string name="btn_watch_later">Смотреть позже</string>
+    <string name="btn_selections">Подборки</string>
+    <string name="btn_setting">Настройки</string>
+    <string name="menu_settings_title">Настройки</string>
+    <string name="menu_favorites_title">Избранное</string>
+    <string name="menu_watch_later_title">Смотреть позже</string>
+    <string name="menu_selections_title">Подборки</string>
+    <string name="page_title">WatchMovie</string>
 </resources>
