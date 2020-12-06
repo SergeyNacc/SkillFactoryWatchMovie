@@ -9,5 +9,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //initNavigation()
+
     }
+
+/*    private fun initNavigation() {
+        topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.settings -> {
+                    Toast.makeText(this, "Настройки", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+*/
 }
