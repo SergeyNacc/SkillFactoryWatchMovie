@@ -7,6 +7,8 @@ import android.widget.Toast
 
 class MainActivity : Activity() {
 
+    private lateinit var filmsAdapter: FilmListRecyclerAdapter
+
     val filmsDataBase = listOf(
             Film("The Witcher", R.drawable.the_witcher, "Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts."),
             Film("Harry Potter and the Sorcerer's Stone", R.drawable.harry_potter, "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world."),
