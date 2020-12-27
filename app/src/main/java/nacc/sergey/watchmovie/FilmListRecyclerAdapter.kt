@@ -2,11 +2,10 @@ package nacc.sergey.watchmovie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса Activity
-class FilmListRecyclerAdapter (private val clickListener: AdapterView.OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     //Здесь у нас хранится список элементов для RV
     private val items = mutableListOf<Film>()
@@ -42,5 +41,6 @@ class FilmListRecyclerAdapter (private val clickListener: AdapterView.OnItemClic
     //Интерфейс для обработки кликов
     interface OnItemClickListener {
         fun click(film: Film)
+        fun click(film: Film, position: Int)
     }
 }
