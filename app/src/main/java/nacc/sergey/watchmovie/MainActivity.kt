@@ -1,14 +1,17 @@
 package nacc.sergey.watchmovie
 
 import android.app.Activity
-import android.content.Intent
+
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import nacc.sergey.watchmovie.databinding.ActivityMainBinding
+
+
 
 class MainActivity : Activity() {
 
+    private lateinit var binding: ActivityMainBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
     val filmsDataBase = listOf(
@@ -26,20 +29,23 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initNavigation()
 
         //находим наш RV
-        main_recycler.apply {
+        binding.mainRecycler.apply {
             //Инициализируем наш адаптер в конструктор передаем анонимно инициализированный интерфейс,
             //оставим его пока пустым, он нам понадобится во второй части задания
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
+                override fun click(film: Film) {}
                 override fun click(film: Film, position: Int) {}
             })
+
             //Присваиваем адаптер
             adapter = filmsAdapter
-            //Присвои layoutmanager
+            //Присвоим layoutmanager
             layoutManager = LinearLayoutManager(this@MainActivity)
             //Применяем декоратор для отступов
             val decorator = TopSpacingItemDecoration(8)
@@ -51,7 +57,7 @@ class MainActivity : Activity() {
     }
 
     private fun initNavigation() {
-        topAppBar.setOnMenuItemClickListener {
+        binding.topAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.settings -> {
                     Toast.makeText(this, "Настройки", Toast.LENGTH_SHORT).show()
@@ -61,7 +67,7 @@ class MainActivity : Activity() {
             }
         }
 
-        bottom_navigation.setOnNavigationItemSelectedListener {
+        binding.bottomNavigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
                 R.id.favorites -> {
