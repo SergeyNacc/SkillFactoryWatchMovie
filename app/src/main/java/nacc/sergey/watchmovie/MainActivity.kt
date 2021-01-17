@@ -38,9 +38,13 @@ class MainActivity : Activity() {
         main_recycler.apply {
             //Инициализируем наш адаптер в конструктор передаем анонимно инициализированный интерфейс
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
-                override fun click(film: Film, position: Int) {
+
+                override fun click(film: Film) {
+                    val bundle = Bundle() //Создаем бандл и кладем туда объект с данными фильма
+                    bundle.putParcelable("film", film)
                     val intent = Intent(this@MainActivity,DetailsActivity::class.java)
-                    startActivity(intent)
+                    intent.putExtras(bundle) //Прикрепляем бандл к интенту
+                    startActivity(intent) //Запускаем активити через интент
                 }
             })
 
@@ -75,7 +79,7 @@ class MainActivity : Activity() {
                     true
                 }
                 R.id.watch_later -> {
-                    Toast.makeText(this, "Посмотреть похже", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Посмотреть позже", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.selections -> {
