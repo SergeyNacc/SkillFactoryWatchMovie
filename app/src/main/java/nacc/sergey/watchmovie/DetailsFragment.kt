@@ -14,10 +14,12 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
+
+        setFilmsDetails()
     }
 
     private fun setFilmsDetails() {
-        val film = intent.extras?.get("film") as Film  //Получаем наш фильм из переданного бандла
+        val film = arguments?.get("film") as Film  //Получаем наш фильм из переданного бандла
 
         details_toolbar.title = film.title  //Устанавливаем заголовок
         details_poster.setImageResource(film.poster)  //Устанавливаем картинку

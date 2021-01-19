@@ -1,14 +1,12 @@
 package nacc.sergey.watchmovie
 
-import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.film_item.view.*
 
 
-
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +28,12 @@ class MainActivity : Activity() {
         val bundle = Bundle()   //Создаем "посылку"
         bundle.putParcelable("film",film)   //Кладем наш фильм в "посылку"
         val fragment = DetailsFragment()     //Кладем фрагмент с деталями в перменную
-        fragment.arguments = bundle //Прикрепляем нашу "посылку" к фрагменту
+        fragment.arguments = bundle     //Прикрепляем нашу "посылку" к фрагменту
 
         //Запускаем фрагмент
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragment_placeholder, HomeFragment())
+            .add(R.id.fragment_placeholder, fragment)
             .addToBackStack(null)
             .commit()
 

@@ -1,6 +1,6 @@
 package nacc.sergey.watchmovie
 
-import android.content.Intent
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
-    val filmsDataBase = listOf(
+    private val filmsDataBase = listOf(
         Film("The Witcher", R.drawable.the_witcher, "Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts."),
         Film("Harry Potter and the Sorcerer's Stone", R.drawable.harry_potter, "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world."),
         Film("Home Alone", R.drawable.home_alone, "An eight-year-old troublemaker must protect his house from a pair of burglars when he is accidentally left home alone by his family during Christmas vacation."),
@@ -35,15 +35,9 @@ class HomeFragment : Fragment() {
 
         //находим наш RV
         main_recycler.apply {
-            //Инициализируем наш адаптер в конструктор передаем анонимно инициализированный интерфейс
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
-
                 override fun click(film: Film) {
-                    val bundle = Bundle() //Создаем бандл и кладем туда объект с данными фильма
-                    bundle.putParcelable("film", film)
-                    val intent = Intent(requireContext(),DetailsFragment::class.java)
-                    intent.putExtras(bundle) //Прикрепляем бандл к интенту
-                    startActivity(intent) //Запускаем активити через интент
+                    (requireActivity() as MainActivity).launchDetailsFragment(film)
                 }
             })
 
