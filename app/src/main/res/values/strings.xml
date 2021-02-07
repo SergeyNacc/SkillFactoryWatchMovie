@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WatchMovie</string>
+    <string name="menu_favorites_title">Избранное</string>
+    <string name="menu_watch_later_title">Смотреть позже</string>
+    <string name="menu_selections_title">Подборки</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
