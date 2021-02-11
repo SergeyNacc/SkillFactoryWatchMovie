@@ -2,10 +2,6 @@ package nacc.sergey.watchmovie
 
 
 import android.os.Bundle
-import android.transition.Scene
-import android.transition.Slide
-import android.transition.TransitionManager
-import android.transition.TransitionSet
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
@@ -29,6 +25,11 @@ class HomeFragment : Fragment() {
             Film("The Shawshank Redemption", R.drawable.the_shawshank_redemption, "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.")
     )
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -37,27 +38,17 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val scene = Scene.getSceneForLayout(home_fragment_root, R.layout.merge_home_screen_content, requireContext())
+        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 1)
 
-        //Создаем анимацию выезда поля поиска сверху
-        val searchSlide = Slide(Gravity.TOP).addTarget(R.id.search_view)
+        //находим наш RV
+        initRecyckler()
 
-        //Создаем анимацию выезда RV снизу
-        val recycleSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
+        //Кладем нашу БД в RV
+        filmsAdapter.addItems(filmsDataBase)
+    }
 
-        //Создаем экземпляр TransitionSet, который объединит все наши анимации
-        val customTransition = TransitionSet().apply {
-            //время за которое будет проходить анимация
-            duration = 800
-            //Добавляем анимации
-            addTransition(searchSlide)
-            addTransition(recycleSlide)
-        }
-
-        //запускаем через TransitionManager, но вторым параметром передаем нашу кастомную анимацию
-        TransitionManager.go(scene, customTransition)
-
-        //появление ввода при нажатии в любое место строки Поиск
+    //появление ввода при нажатии в любое место строки Поиск
+    private fun initSearchView(){
         search_view.setOnClickListener {
             search_view.isIconified = false
         }
@@ -90,12 +81,6 @@ class HomeFragment : Fragment() {
                 return true
             }
         })
-
-        //находим наш RV
-        initRecyckler()
-
-        //Кладем нашу БД в RV
-        filmsAdapter.addItems(filmsDataBase)
     }
 
     private fun initRecyckler() {
