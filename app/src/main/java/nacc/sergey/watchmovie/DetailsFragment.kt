@@ -6,14 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_details.*
+import nacc.sergey.watchmovie.databinding.FragmentDetailsBinding
 
 class DetailsFragment : Fragment() {
 
     private lateinit var film: Film
+    private lateinit var binding: FragmentDetailsBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_details, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,18 +24,18 @@ class DetailsFragment : Fragment() {
         setFilmsDetails()
 
         //обработка кнопки, находится фильм в Избранном или нет
-        details_fab_favorites.setOnClickListener{
+        binding.detailsFabFavorites.setOnClickListener{
             if (film.isInFavorites) {
-                details_fab_favorites.setImageResource(R.drawable.ic_baseline_favorite_24)
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_24)
                 film.isInFavorites = true
             } else {
-                details_fab_favorites.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 film.isInFavorites = false
             }
         }
 
         // создаем реализацию кнопки «Поделится».
-        details_fab_share.setOnClickListener {
+        binding.detailsFabShare.setOnClickListener {
             val intent = Intent()   //создаём интент
             intent.action = Intent.ACTION_SEND   //Укзываем action с которым он запускается
 
@@ -54,12 +56,12 @@ class DetailsFragment : Fragment() {
     private fun setFilmsDetails() {
         val film = arguments?.get("film") as Film  //Получаем наш фильм из переданного бандла
 
-        details_toolbar.title = film.title  //Устанавливаем заголовок
-        details_poster.setImageResource(film.poster)  //Устанавливаем картинку
-        details_description.text = film.description   //Устанавливаем описание
+        binding.detailsToolbar.title = film.title  //Устанавливаем заголовок
+        binding.detailsPoster.setImageResource(film.poster)  //Устанавливаем картинку
+        binding.detailsDescription.text = film.description   //Устанавливаем описание
 
         //логика установки нужной иконки в запуске фрагмента
-        details_fab_favorites.setImageResource(
+        binding.detailsFabFavorites.setImageResource(
                 if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
                 else R.drawable.ic_baseline_favorite_border_24
         )
