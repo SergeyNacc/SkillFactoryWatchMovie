@@ -1,10 +1,11 @@
-package nacc.sergey.watchmovie
+package nacc.sergey.watchmovie.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import nacc.sergey.watchmovie.utils.AnimationHelper
 import nacc.sergey.watchmovie.databinding.FragmentWatchLaterBinding
 
 
@@ -20,6 +21,10 @@ class WatchLaterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AnimationHelper.performFragmentCircularRevealAnimation(binding.watchLaterFragmentRoot, requireActivity(), 3)
+        AnimationHelper.performFragmentCircularRevealAnimation(
+            binding.watchLaterFragmentRoot,
+            requireActivity(),
+            3
+        )
     }
 }

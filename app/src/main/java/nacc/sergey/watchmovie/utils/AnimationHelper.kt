@@ -1,4 +1,4 @@
-package nacc.sergey.watchmovie
+package nacc.sergey.watchmovie.utils
 
 import android.app.Activity
 import android.view.View

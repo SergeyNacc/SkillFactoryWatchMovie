@@ -1,9 +1,10 @@
-package nacc.sergey.watchmovie
+package nacc.sergey.watchmovie.view.customviews
 
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import nacc.sergey.watchmovie.R
 
 class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet?=null) : View(context, attributeSet) {
 

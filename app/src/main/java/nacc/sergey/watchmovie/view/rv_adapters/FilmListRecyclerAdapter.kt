@@ -1,8 +1,11 @@
-package nacc.sergey.watchmovie
+package nacc.sergey.watchmovie.view.rv_adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import nacc.sergey.watchmovie.view.rv_viewholders.FilmViewHolder
+import nacc.sergey.watchmovie.R
+import nacc.sergey.watchmovie.domain.Film
 
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса Activity
@@ -27,7 +30,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
                 //Обрабатываем нажатие на весь элемент целиком
                 //и вызываем метод нашего листенера, который мы получаем из
                 //конструктора адаптера
-                holder.itemView.item_container.setOnClickListener {
+                holder.itemView.setOnClickListener {
                     clickListener.click(items[position])
                 }
             }

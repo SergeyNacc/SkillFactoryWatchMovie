@@ -1,9 +1,12 @@
-package nacc.sergey.watchmovie
+package nacc.sergey.watchmovie.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import nacc.sergey.watchmovie.R
 import nacc.sergey.watchmovie.databinding.ActivityMainBinding
+import nacc.sergey.watchmovie.domain.Film
+import nacc.sergey.watchmovie.view.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun launchDetailsFragment(film:Film) {
+    fun launchDetailsFragment(film: Film) {
         val bundle = Bundle()   //Создаем "посылку"
         bundle.putParcelable("film",film)   //Кладем наш фильм в "посылку"
         val fragment = DetailsFragment()     //Кладем фрагмент с деталями в перменную

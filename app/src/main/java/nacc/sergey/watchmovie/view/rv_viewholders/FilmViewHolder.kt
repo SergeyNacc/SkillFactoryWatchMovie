@@ -1,10 +1,10 @@
-package nacc.sergey.watchmovie
+package nacc.sergey.watchmovie.view.rv_viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.film_item.view.*
-
+import nacc.sergey.watchmovie.domain.Film
 
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)

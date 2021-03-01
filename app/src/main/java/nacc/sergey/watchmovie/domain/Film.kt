@@ -1,4 +1,4 @@
-package nacc.sergey.watchmovie
+package nacc.sergey.watchmovie.domain
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -1,4 +1,4 @@
-package nacc.sergey.watchmovie
+package nacc.sergey.watchmovie.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import nacc.sergey.watchmovie.*
 import nacc.sergey.watchmovie.databinding.FragmentFavoritesBinding
+import nacc.sergey.watchmovie.domain.Film
+import nacc.sergey.watchmovie.view.rv_adapters.FilmListRecyclerAdapter
+import nacc.sergey.watchmovie.view.rv_adapters.TopSpacingItemDecoration
+import nacc.sergey.watchmovie.utils.AnimationHelper
+import nacc.sergey.watchmovie.view.MainActivity
 
 
 class FavoritesFragment : Fragment() {
@@ -26,10 +32,14 @@ class FavoritesFragment : Fragment() {
         //Получаем список при транзакции фрагмента
         val favoritesList: List<Film> = emptyList()
 
-        AnimationHelper.performFragmentCircularRevealAnimation(binding.favoritesFragmentRoot, requireActivity(),2)
+        AnimationHelper.performFragmentCircularRevealAnimation(
+            binding.favoritesFragmentRoot,
+            requireActivity(),
+            2
+        )
 
         binding.favoritesRecycler.apply {
-            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
+            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
                 }
