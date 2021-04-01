@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.film_item.view.*
+import nacc.sergey.watchmovie.data.ApiConstants
 import nacc.sergey.watchmovie.domain.Film
 
 
@@ -25,7 +26,7 @@ class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //Указываем контейнер, в котором будет "жить" наша картинка
         Glide.with(itemView)
             //Загружаем ресурс
-            .load(film.poster)
+            .load(ApiConstants.IMAGES_URL + "w342" + film.poster)
             //Центруем изображение
             .centerCrop()
             //Указываем ImageView, куда будем загружать изображение

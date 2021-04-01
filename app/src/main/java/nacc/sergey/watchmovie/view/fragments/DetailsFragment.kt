@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import nacc.sergey.watchmovie.domain.Film
 import nacc.sergey.watchmovie.R
+import nacc.sergey.watchmovie.data.ApiConstants
 import nacc.sergey.watchmovie.databinding.FragmentDetailsBinding
 
 class DetailsFragment : Fragment() {
@@ -59,7 +61,13 @@ class DetailsFragment : Fragment() {
         val film = arguments?.get("film") as Film  //Получаем наш фильм из переданного бандла
 
         binding.detailsToolbar.title = film.title  //Устанавливаем заголовок
-        binding.detailsPoster.setImageResource(film.poster)  //Устанавливаем картинку
+
+        //Устанавливаем картинку
+        Glide.with(this)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .centerCrop()
+            .into(binding.detailsPoster)
+
         binding.detailsDescription.text = film.description   //Устанавливаем описание
 
         //логика установки нужной иконки в запуске фрагмента
