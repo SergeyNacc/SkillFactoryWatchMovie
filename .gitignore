@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-D:\Workspace\SkillFactoryAndroidStudio\WatchMovie\app\src\main\java\nacc\sergey\watchmovie\API.kt
+/WatchMovie/app/src/main/java/nacc/sergey/watchmovie/API.kt

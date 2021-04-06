@@ -19,13 +19,17 @@ class HomeFragmentViewModel : ViewModel() {
 
     init {
         App.instance.dagger.inject(this)    //вызваем метод inject на компоненте, передав туда ссылку на наш класс
-       interactor.getFilmsFromApi(1, object : ApiCallback {
-           override fun onSuccess(films: List<Film>) {
-               filmsListLiveData.postValue(films)
-           }
-           override fun onFailure() {
-           }
-       })
+        getFilms()
+    }
+
+    fun getFilms() {
+        interactor.getFilmsFromApi(1, object : ApiCallback {
+            override fun onSuccess(films: List<Film>) {
+                filmsListLiveData.postValue(films)
+            }
+            override fun onFailure() {
+            }
+        })
     }
 
     interface ApiCallback {

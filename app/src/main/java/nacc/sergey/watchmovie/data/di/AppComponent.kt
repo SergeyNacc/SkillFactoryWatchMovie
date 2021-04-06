@@ -5,6 +5,7 @@ import nacc.sergey.watchmovie.data.di.modules.DatabaseModule
 import nacc.sergey.watchmovie.data.di.modules.DomainModule
 import nacc.sergey.watchmovie.data.di.modules.RemoteModule
 import nacc.sergey.watchmovie.viewmodel.HomeFragmentViewModel
+import nacc.sergey.watchmovie.viewmodel.SettingsFragmentViewModel
 import javax.inject.Singleton
 
 
@@ -22,5 +23,8 @@ interface AppComponent {
 
     //метод для того, чтобы внедрять зависимости в HomeFragmentViewModel
     fun inject(homeFragmentViewModel: HomeFragmentViewModel)
+
+    //метод для того, чтобы внедрять зависимости в SettingsFragmentViewModel
+    fun inject(settingsFragmentViewModel: SettingsFragmentViewModel)
 
 }
