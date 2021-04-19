@@ -4,10 +4,12 @@ package nacc.sergey.watchmovie.data.di.modules
 //что относится к слою Model (то есть данным для всего приложения).
 
 import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import nacc.sergey.watchmovie.data.MainRepository
-import nacc.sergey.watchmovie.data.db.DatabaseHelper
+import nacc.sergey.watchmovie.data.dao.FilmDao
+import nacc.sergey.watchmovie.data.db.AppDatabase
 import javax.inject.Singleton
 
 
@@ -15,9 +17,10 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Provides
     @Singleton
-    fun provideDatabaseHelper(context: Context) = DatabaseHelper(context)
+    fun provideFilmDao(context: Context) = Room.databaseBuilder(
+            context, AppDatabase::class.java, "film_db").build().filmDao()
 
     @Provides
     @Singleton
-    fun provideRepository(databaseHelper: DatabaseHelper) = MainRepository(databaseHelper)
+    fun provideRepository(filmDao: FilmDao) = MainRepository(filmDao)
 }

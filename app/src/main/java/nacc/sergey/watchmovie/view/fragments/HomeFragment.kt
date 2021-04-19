@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import nacc.sergey.watchmovie.databinding.FragmentHomeBinding
-import nacc.sergey.watchmovie.domain.Film
+import nacc.sergey.watchmovie.data.entity.Film
 import nacc.sergey.watchmovie.view.rv_adapters.FilmListRecyclerAdapter
 import nacc.sergey.watchmovie.view.rv_adapters.TopSpacingItemDecoration
 import nacc.sergey.watchmovie.utils.AnimationHelper

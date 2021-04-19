@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import nacc.sergey.watchmovie.view.rv_viewholders.FilmViewHolder
 import nacc.sergey.watchmovie.R
-import nacc.sergey.watchmovie.domain.Film
+import nacc.sergey.watchmovie.data.entity.Film
 
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса Activity

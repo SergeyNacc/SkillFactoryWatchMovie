@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import nacc.sergey.watchmovie.domain.Film
+import nacc.sergey.watchmovie.data.entity.Film
 import nacc.sergey.watchmovie.R
 import nacc.sergey.watchmovie.data.ApiConstants
 import nacc.sergey.watchmovie.databinding.FragmentDetailsBinding
@@ -29,7 +29,7 @@ class DetailsFragment : Fragment() {
 
         //обработка кнопки, находится фильм в Избранном или нет
         binding.detailsFabFavorites.setOnClickListener{
-            if (film.isInFavorites) {
+            if (!film.isInFavorites) {
                 binding.detailsFabFavorites.setImageResource(R.drawable.ic_baseline_favorite_24)
                 film.isInFavorites = true
             } else {

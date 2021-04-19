@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import nacc.sergey.watchmovie.R
 import nacc.sergey.watchmovie.databinding.ActivityMainBinding
-import nacc.sergey.watchmovie.domain.Film
+import nacc.sergey.watchmovie.data.entity.Film
 import nacc.sergey.watchmovie.view.fragments.*
 
 

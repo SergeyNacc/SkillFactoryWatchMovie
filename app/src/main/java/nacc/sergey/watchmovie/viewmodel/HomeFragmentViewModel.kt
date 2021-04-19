@@ -6,8 +6,9 @@ package nacc.sergey.watchmovie.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import nacc.sergey.watchmovie.App
-import nacc.sergey.watchmovie.domain.Film
+import nacc.sergey.watchmovie.data.entity.Film
 import nacc.sergey.watchmovie.domain.Interactor
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class HomeFragmentViewModel : ViewModel() {
@@ -28,7 +29,9 @@ class HomeFragmentViewModel : ViewModel() {
                 filmsListLiveData.postValue(films)
             }
             override fun onFailure() {
-                filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                Executors.newSingleThreadExecutor().execute {
+                    filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                }
             }
         })
     }

@@ -1,7 +1,7 @@
 package nacc.sergey.watchmovie.data
 
 import retrofit2.Call
-import nacc.sergey.watchmovie.data.Entity.TmdbResults
+import nacc.sergey.watchmovie.data.entity.TmdbResults
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

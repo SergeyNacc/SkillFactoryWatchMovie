@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.film_item.view.*
 import nacc.sergey.watchmovie.data.ApiConstants
-import nacc.sergey.watchmovie.domain.Film
+import nacc.sergey.watchmovie.data.entity.Film
 
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)

@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import nacc.sergey.watchmovie.*
 import nacc.sergey.watchmovie.databinding.FragmentFavoritesBinding
-import nacc.sergey.watchmovie.domain.Film
+import nacc.sergey.watchmovie.data.entity.Film
 import nacc.sergey.watchmovie.view.rv_adapters.FilmListRecyclerAdapter
 import nacc.sergey.watchmovie.view.rv_adapters.TopSpacingItemDecoration
 import nacc.sergey.watchmovie.utils.AnimationHelper

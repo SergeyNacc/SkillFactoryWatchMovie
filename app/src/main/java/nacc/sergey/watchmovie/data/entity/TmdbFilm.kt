@@ -1,4 +1,4 @@
-package nacc.sergey.watchmovie.data.Entity
+package nacc.sergey.watchmovie.data.entity
 
 import com.google.gson.annotations.SerializedName
 

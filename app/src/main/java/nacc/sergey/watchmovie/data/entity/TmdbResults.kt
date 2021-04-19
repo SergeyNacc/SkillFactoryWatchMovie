@@ -1,7 +1,6 @@
-package nacc.sergey.watchmovie.data.Entity
+package nacc.sergey.watchmovie.data.entity
 
 import com.google.gson.annotations.SerializedName
-import nacc.sergey.watchmovie.data.Entity.TmdbFilm
 
 data class TmdbResults (
     @SerializedName("page")

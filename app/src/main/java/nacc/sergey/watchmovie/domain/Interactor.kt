@@ -2,7 +2,8 @@ package nacc.sergey.watchmovie.domain
 
 import nacc.sergey.watchmovie.API
 import nacc.sergey.watchmovie.data.*
-import nacc.sergey.watchmovie.data.Entity.TmdbResults
+import nacc.sergey.watchmovie.data.entity.Film
+import nacc.sergey.watchmovie.data.entity.TmdbResults
 import nacc.sergey.watchmovie.data.preferenes.PreferenceProvider
 import nacc.sergey.watchmovie.utils.Converter
 import nacc.sergey.watchmovie.viewmodel.HomeFragmentViewModel
@@ -22,9 +23,7 @@ class Interactor(val repo: MainRepository, private val retrofitService: TmdbApi,
                 val list = Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
 
                 //Кладем фильмы в бд
-                list.forEach{
-                    repo.putToDb(film = it)
-                }
+                repo.putToDb(list)
                 callback.onSuccess(list)
             }
 
