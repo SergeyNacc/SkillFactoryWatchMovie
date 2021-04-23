@@ -1,5 +1,6 @@
 package nacc.sergey.watchmovie.domain
 
+import androidx.lifecycle.LiveData
 import nacc.sergey.watchmovie.API
 import nacc.sergey.watchmovie.data.*
 import nacc.sergey.watchmovie.data.entity.Film
@@ -24,7 +25,7 @@ class Interactor(val repo: MainRepository, private val retrofitService: TmdbApi,
 
                 //Кладем фильмы в бд
                 repo.putToDb(list)
-                callback.onSuccess(list)
+                callback.onSuccess()
             }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -42,6 +43,6 @@ class Interactor(val repo: MainRepository, private val retrofitService: TmdbApi,
         preferences.saveDefaultCategory(category)
     }
 
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 
 }
