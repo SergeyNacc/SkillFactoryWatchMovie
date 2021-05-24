@@ -1,36 +1,52 @@
 package nacc.sergey.watchmovie.domain
 
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import nacc.sergey.watchmovie.API
 import nacc.sergey.watchmovie.data.*
 import nacc.sergey.watchmovie.data.entity.Film
 import nacc.sergey.watchmovie.data.entity.TmdbResults
 import nacc.sergey.watchmovie.data.preferenes.PreferenceProvider
 import nacc.sergey.watchmovie.utils.Converter
-import nacc.sergey.watchmovie.viewmodel.HomeFragmentViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class Interactor(val repo: MainRepository, private val retrofitService: TmdbApi, private val preferences: PreferenceProvider) {
 
-//    передаём коллбэк из вью модели, чтобы реагировать на то, когда фильмы будут получены
-//    и страницу, которую нужно загрузить (это для пагинации)
-    fun getFilmsFromApi(page: Int, callback: HomeFragmentViewModel.ApiCallback) {
+    val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    var progressBarState = Channel<Boolean>(Channel.CONFLATED)
+
+    fun getFilmsFromApi(page: Int) {
+        //Показываем ProgressBar
+        scope.launch {
+            progressBarState.send(true)
+        }
+
+        //Метод getDefaultCategoryFromPreferences() будет получать при каждом запросе нужный нам список фильмов
         retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page).enqueue(object : Callback<TmdbResults> {
 
             override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
+
                 //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
                 val list = Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
 
                 //Кладем фильмы в бд
-                repo.putToDb(list)
-                callback.onSuccess()
+                //В случае успешного ответа выключаем ProgressBar
+                scope.launch {
+                    repo.putToDb(list)
+                    progressBarState.send(false)
+                }
             }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
-                //В случае провала вызываем другой метод коллбека
-                callback.onFailure()
+                //В случае провала выключаем ProgressBar
+                scope.launch {
+                    progressBarState.send(false)
+                }
             }
         })
     }
@@ -43,6 +59,6 @@ class Interactor(val repo: MainRepository, private val retrofitService: TmdbApi,
         preferences.saveDefaultCategory(category)
     }
 
-    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
+    fun getFilmsFromDB(): Flow<List<Film>> = repo.getAllFromDB()
 
 }

@@ -6,9 +6,10 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import nacc.sergey.watchmovie.databinding.FragmentHomeBinding
 import nacc.sergey.watchmovie.data.entity.Film
 import nacc.sergey.watchmovie.view.rv_adapters.FilmListRecyclerAdapter
@@ -22,6 +23,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var scope: CoroutineScope
 
     //Возвращаем БД с фильмами. Инициализируем (лениво) ViewModel
     private val viewModel by lazy {
@@ -65,17 +67,31 @@ class HomeFragment : Fragment() {
         initRecyckler()
 
         //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                viewModel.filmsListData.collect {
+                    withContext(Dispatchers.Main) {
+                        filmsAdapter.addItems(it)
+                        filmsDataBase = it
+                    }
+                }
+            }
+            scope.launch {
+                for (element in viewModel.showProgressBar) {
+                    launch(Dispatchers.Main) {
+                        binding.progressBar.isVisible = element
+                    }
+                }
+            }
+        }
 
         initPullToRefresh()
         initSearchView()
+    }
 
-        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
-            binding.progressBar.isVisible = it
-        })
+    override fun onStop() {
+        super.onStop()
+        scope.cancel()
     }
 
     private fun initPullToRefresh() {
